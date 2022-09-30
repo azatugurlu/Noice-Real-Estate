@@ -26,7 +26,8 @@ fun PropertyDetail(navController: NavController, propertyId: String?) {
         Row {
             MyApplicationTopBar(
                 title = property?.location,
-                includeBackButton = (navController.previousBackStackEntry != null)) {
+                includeBackButton = (navController.previousBackStackEntry != null)
+            ) {
                 navController.navigateUp()
             }
             Spacer(modifier = Modifier.padding(top = 40.dp))
@@ -37,11 +38,14 @@ fun PropertyDetail(navController: NavController, propertyId: String?) {
                     val pagerState = rememberPagerState()
                     HorizontalPager(
                         count = property.images.size,
-                        state = pagerState) { currentPage ->
+                        state = pagerState
+                    ) { currentPage ->
 
-                        PropertyFeaturedImage(property.images[currentPage],
+                        PropertyFeaturedImage(
+                            property.images[currentPage],
                             property.roomDefinition,
-                            Modifier.height(250.dp))
+                            Modifier.height(250.dp)
+                        )
                     }
                     HorizontalPagerIndicator(
                         pagerState = pagerState,
@@ -56,18 +60,15 @@ fun PropertyDetail(navController: NavController, propertyId: String?) {
                     Row(
                         modifier = Modifier
                             .padding(16.dp)
-                            .fillMaxWidth()) {
-                        Text(text = property.description,
+                            .fillMaxWidth()
+                    ) {
+                        Text(
+                            text = property.description,
                             style = MaterialTheme.typography.bodyMedium
                         )
                     }
-
-
                 }
             }
         }
-
-
-
     }
 }

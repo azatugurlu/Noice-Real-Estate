@@ -1,13 +1,16 @@
 package com.azat.noicerealestate.screens.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
@@ -26,6 +29,8 @@ import com.azat.noicerealestate.R
 import com.azat.noicerealestate.screens.common.LoadingAnimation
 import com.azat.noicerealestate.screens.common.property.PropertyHeader
 import com.azat.noicerealestate.screens.common.property.PropertyTitle
+import com.azat.noicerealestate.ui.theme.md_theme_light_background
+import com.azat.noicerealestate.ui.theme.md_theme_light_background_color
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -41,7 +46,7 @@ fun Home(navController: NavController) {
                 .fillMaxSize()
                 .height(60.dp)
         ) {
-            Column {
+            Column(Modifier.background(md_theme_light_background_color)) {
                 Row {
                     TopWelcomeView()
                 }
@@ -69,7 +74,7 @@ fun TopWelcomeView() {
         Icon(
             imageVector = Icons.Filled.Face,
             contentDescription = stringResource(id = R.string.profile),
-            tint = Color.Blue,
+            tint = colors.onSurface,
             modifier = Modifier
                 .padding(12.dp)
                 .size(52.dp)
@@ -100,9 +105,12 @@ fun PropertyView(property: Property, onItemSelected: (Int) -> Unit) {
     Card(
         modifier = Modifier
             .clickable { onItemSelected(property.id) }
-            .padding(horizontal = 8.dp, vertical = 4.dp)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
             .fillMaxWidth(),
-        shape = RoundedCornerShape(corner = CornerSize(8.dp))
+        shape = RoundedCornerShape(corner = CornerSize(8.dp)),
+        colors = CardDefaults.cardColors(
+                containerColor =  Color.White,
+    ),
     ) {
         Column(
             Modifier.padding(bottom = 16.dp)
