@@ -6,14 +6,18 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.azat.noicerealestate.screens.common.MyApplicationTopBar
+import com.azat.noicerealestate.screens.common.property.PropertyHeader
 import com.azat.noicerealestate.screens.common.property.PropertyTitle
 import com.azat.noicerealestate.screens.home.PropertyFeaturedImage
+import com.google.accompanist.pager.*
 
+@OptIn(ExperimentalPagerApi::class)
 @Composable
 fun PropertyDetail(navController: NavController, propertyId: String?) {
     val propertyDetailViewModel = hiltViewModel<PropertyDetailViewModel>()
@@ -30,9 +34,24 @@ fun PropertyDetail(navController: NavController, propertyId: String?) {
         Row(modifier = Modifier.verticalScroll(rememberScrollState())) {
             if (property != null) {
                 Column {
-                    PropertyFeaturedImage(property,Modifier
-                        .height(250.dp))
+                    val pagerState = rememberPagerState()
+                    HorizontalPager(
+                        count = property.images.size,
+                        state = pagerState) { currentPage ->
+
+                        PropertyFeaturedImage(property.images[currentPage],
+                            property.roomDefinition,
+                            Modifier.height(250.dp))
+                    }
+                    HorizontalPagerIndicator(
+                        pagerState = pagerState,
+                        modifier = Modifier
+                            .align(Alignment.CenterHorizontally)
+                            .padding(16.dp),
+                    )
                     PropertyTitle(property)
+                    Spacer(modifier = Modifier.height(8.dp))
+                    PropertyHeader(property)
                     Spacer(modifier = Modifier.height(32.dp))
                     Row(
                         modifier = Modifier

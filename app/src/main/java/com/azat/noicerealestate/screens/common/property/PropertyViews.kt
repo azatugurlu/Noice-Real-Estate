@@ -12,13 +12,26 @@ import androidx.compose.ui.unit.dp
 import com.azat.domain.entity.Property
 
 @Composable
+fun PropertyHeader(property: Property) {
+    Row(modifier = Modifier
+        .padding(16.dp)) {
+        Text(text = property.location, style = MaterialTheme.typography.titleMedium)
+        Spacer(Modifier.weight(1f))
+        Text(text = property.buildingYear,
+            style = MaterialTheme.typography.titleMedium
+        )
+    }
+}
+
+
+@Composable
 fun PropertyTitle(property: Property) {
     Row(
         modifier = Modifier
             .padding(top = 16.dp, start = 16.dp, end = 16.dp)
             .fillMaxWidth()
     ) {
-        Text(text = property.location,
+        Text(text = property.price,
             style = MaterialTheme.typography.titleMedium
         )
         Spacer(Modifier.weight(1f))

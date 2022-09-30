@@ -24,6 +24,7 @@ import androidx.navigation.NavController
 import com.azat.domain.entity.Property
 import com.azat.noicerealestate.R
 import com.azat.noicerealestate.screens.common.LoadingAnimation
+import com.azat.noicerealestate.screens.common.property.PropertyHeader
 import com.azat.noicerealestate.screens.common.property.PropertyTitle
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
@@ -106,18 +107,20 @@ fun PropertyView(property: Property, onItemSelected: (Int) -> Unit) {
         Column(
             Modifier.padding(bottom = 16.dp)
         ) {
-            PropertyFeaturedImage(property, Modifier.height(200.dp))
+            PropertyHeader(property)
+            Spacer(modifier = Modifier.height(8.dp))
+            PropertyFeaturedImage(property.featureImage, property.roomDefinition, Modifier.height(200.dp))
             PropertyTitle(property)
         }
     }
 }
 
 @Composable
-fun PropertyFeaturedImage(property: Property, modifier: Modifier) {
+fun PropertyFeaturedImage(link: String, description: String, modifier: Modifier) {
     GlideImage(
-        imageModel = property.featureImage,
+        imageModel = link,
         imageOptions = ImageOptions(
-            contentDescription = "Property: ${property.roomDefinition}",
+            contentDescription = "Property: $description",
             contentScale = ContentScale.Crop,
             alignment = Alignment.Center
         ),
