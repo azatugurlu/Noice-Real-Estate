@@ -6,6 +6,7 @@ data class Property(
     val size: String,
     val roomSize: String,
     val roomDefinition: String,
+    val description: String,
     val featureImage: String,
     val images: List<String>,
 )
