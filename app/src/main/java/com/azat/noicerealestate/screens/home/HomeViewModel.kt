@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.azat.domain.Output.Status
 import com.azat.domain.entity.Property
 import com.azat.domain.usecases.PropertiesUseCases
+import com.azat.noicerealestate.screens.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,21 +15,13 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val propertiesUseCases: PropertiesUseCases,
-): ViewModel() {
+): BaseViewModel() {
 
     private var _homeViewState = mutableStateOf(HomeViewState())
     val homeViewState: State<HomeViewState> = _homeViewState
 
     init {
         fetchProperties()
-    }
-
-    fun onEvent(event: HomeViewEvent) {
-        when(event) {
-            is HomeViewEvent.CharacterClicked -> {
-
-            }
-        }
     }
 
     private fun fetchProperties() {
@@ -51,10 +44,6 @@ class HomeViewModel @Inject constructor(
                 _homeViewState.value = homeViewState
             }
         }
-    }
-
-    sealed class HomeViewEvent {
-        data class CharacterClicked(val id: String): HomeViewEvent()
     }
 
     data class HomeViewState(

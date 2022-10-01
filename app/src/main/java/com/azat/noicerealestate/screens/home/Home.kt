@@ -105,8 +105,9 @@ fun PropertyView(property: Property, onItemSelected: (Int) -> Unit) {
             .fillMaxWidth(),
         shape = RoundedCornerShape(corner = CornerSize(8.dp)),
         colors = CardDefaults.cardColors(
-                containerColor =  Color.White,
-    ),
+                containerColor =  Color.White
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Column(
             Modifier.padding(bottom = 16.dp)
