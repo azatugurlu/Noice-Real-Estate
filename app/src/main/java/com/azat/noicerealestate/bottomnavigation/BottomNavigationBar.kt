@@ -2,7 +2,9 @@ package com.azat.noicerealestate.bottomnavigation
 
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -10,13 +12,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.azat.noicerealestate.ui.theme.md_theme_light_surfaceTint
 
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
 
     BottomNavigation(
-        backgroundColor = md_theme_light_surfaceTint
+        backgroundColor = MaterialTheme.colorScheme.primary
     ) {
         val backStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = backStackEntry?.destination?.route
@@ -43,7 +44,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                     Text(
                         text = navItem.title,
                         color = Color.White)
-                },
+                }
             )
         }
     }

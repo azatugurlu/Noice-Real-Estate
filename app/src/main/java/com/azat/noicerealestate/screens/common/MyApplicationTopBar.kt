@@ -1,11 +1,11 @@
 package com.azat.noicerealestate.screens.common
 
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -19,7 +19,7 @@ fun MyApplicationTopBar(
     onBackButton: () -> Unit
 ) {
     TopAppBar(
-        backgroundColor = colors.primary,
+        backgroundColor = MaterialTheme.colorScheme.primary,
         title =  {
             Text(text = title ?: "", color = Color.White)
         },

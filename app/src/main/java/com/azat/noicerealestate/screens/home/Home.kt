@@ -9,11 +9,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
+import androidx.compose.material3.*
 import androidx.compose.material3.MaterialTheme.typography
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -29,8 +26,7 @@ import com.azat.noicerealestate.R
 import com.azat.noicerealestate.screens.common.LoadingAnimation
 import com.azat.noicerealestate.screens.common.property.PropertyHeader
 import com.azat.noicerealestate.screens.common.property.PropertyTitle
-import com.azat.noicerealestate.ui.theme.md_theme_light_background
-import com.azat.noicerealestate.ui.theme.md_theme_light_background_color
+import com.azat.noicerealestate.ui.theme.UltraLightGrey
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -46,7 +42,7 @@ fun Home(navController: NavController) {
                 .fillMaxSize()
                 .height(60.dp)
         ) {
-            Column(Modifier.background(md_theme_light_background_color)) {
+            Column(Modifier.background(UltraLightGrey)) {
                 Row {
                     TopWelcomeView()
                 }
@@ -74,7 +70,7 @@ fun TopWelcomeView() {
         Icon(
             imageVector = Icons.Filled.Face,
             contentDescription = stringResource(id = R.string.profile),
-            tint = colors.onSurface,
+            tint = MaterialTheme.colorScheme.primary,
             modifier = Modifier
                 .padding(12.dp)
                 .size(52.dp)
