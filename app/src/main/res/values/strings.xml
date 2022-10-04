@@ -3,4 +3,5 @@
     <string name="back">Back</string>
     <string name="profile">Profile</string>
     <string name="welcome_people">Hi, There!</string>
+    <string name="recent_properties">Most Recent</string>
 </resources>

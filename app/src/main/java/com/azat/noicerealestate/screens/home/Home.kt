@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material3.*
@@ -27,6 +26,10 @@ import com.azat.noicerealestate.screens.common.LoadingAnimation
 import com.azat.noicerealestate.screens.common.property.PropertyHeader
 import com.azat.noicerealestate.screens.common.property.PropertyTitle
 import com.azat.noicerealestate.ui.theme.UltraLightGrey
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.HorizontalPagerIndicator
+import com.google.accompanist.pager.rememberPagerState
 import com.skydoves.landscapist.ImageOptions
 import com.skydoves.landscapist.glide.GlideImage
 
@@ -43,13 +46,13 @@ fun Home(navController: NavController) {
                 .height(60.dp)
         ) {
             Column(Modifier.background(UltraLightGrey)) {
+                val onPropertyClicked: (Int) -> Unit = { id: Int ->
+                    navController.navigate("propertyDetail/${id}")
+                }
                 Row {
                     TopWelcomeView()
                 }
                 Row {
-                    val onPropertyClicked: (Int) -> Unit = { id: Int ->
-                        navController.navigate("propertyDetail/${id}")
-                    }
                     PropertiesList(homeViewModel.homeViewState.value.properties, onPropertyClicked)
                 }
             }
@@ -93,6 +96,14 @@ fun PropertiesList(
                 PropertyView(property = properties[it], onItemSelected)
             }
         )
+        item {
+            Text(text = stringResource(id = R.string.recent_properties),
+                style = typography.titleLarge,
+                modifier = Modifier.padding(16.dp)
+            )
+            RecentProperties(propertiesList, onItemSelected)
+            Spacer(modifier = Modifier.height(16.dp))
+        }
     }
 }
 
@@ -140,5 +151,29 @@ fun Loading() {
         modifier = Modifier.fillMaxSize()
     ) {
         LoadingAnimation(24.dp, 300)
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun RecentProperties(
+    propertiesList: List<Property>,
+    onItemSelected: (Int) -> Unit
+) {
+    Column {
+        val properties = remember { propertiesList }
+        val pagerState = rememberPagerState()
+        HorizontalPager(
+            count = propertiesList.size,
+            state = pagerState
+        ) { currentPage ->
+            PropertyView(property = properties[currentPage], onItemSelected)
+        }
+        HorizontalPagerIndicator(
+            pagerState = pagerState,
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .padding(16.dp),
+        )
     }
 }
