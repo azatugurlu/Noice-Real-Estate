@@ -4,4 +4,4 @@ Domain, Data, Presentation
 
 #Technologies
 
-Kotlin, compose, coroutines, material design 3 
+Kotlin, compose, coroutines, hilt, material design 3 
